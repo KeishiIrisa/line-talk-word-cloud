@@ -1,0 +1,130 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* ── Light mode ── */
+  :root {
+    --bg: #f8f7f4;
+    --surface: #ffffff;
+    --surface-high: #f0ede8;
+    --border: rgba(0, 0, 0, 0.08);
+    --text: #0d0d0d;
+    --subtext: #52525b;
+    --muted: #a1a1aa;
+    --accent: #7c3aed;
+    --error: #dc2626;
+  }
+
+  /* ── Dark mode ── */
+  .dark {
+    --bg: #0a0a0a;
+    --surface: #111111;
+    --surface-high: #1c1c1c;
+    --border: rgba(255, 255, 255, 0.07);
+    --text: #fafafa;
+    --subtext: #a1a1aa;
+    --muted: #52525b;
+    --accent: #a78bfa;
+    --error: #f87171;
+  }
+
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--bg);
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+}
+
+/* ── Shimmer loading effect ── */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(128,128,128,0.08) 0%,
+    rgba(128,128,128,0.18) 30%,
+    rgba(128,128,128,0.22) 50%,
+    rgba(128,128,128,0.18) 70%,
+    rgba(128,128,128,0.08) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.8s ease-in-out infinite;
+}
+
+/* ── Section entrance animation ── */
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.animate-slide-up {
+  animation: slideUp 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ── Pulse glow for loading button ── */
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(139, 92, 246, 0.3); }
+  50%       { box-shadow: 0 0 40px rgba(139, 92, 246, 0.6); }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* ── Skeleton pulse ── */
+@keyframes skeleton-pulse {
+  0%, 100% { opacity: 0.4; }
+  50%       { opacity: 0.8; }
+}
+
+.skeleton {
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+}
+
+/* ── Marquee (seamless horizontal scroll) ── */
+@keyframes marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 38s linear infinite;
+}
+
+.marquee-container {
+  overflow: hidden;
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 8%,
+    black 92%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 8%,
+    black 92%,
+    transparent 100%
+  );
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}

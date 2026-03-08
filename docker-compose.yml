@@ -1,0 +1,9 @@
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      CORS_ORIGINS: "http://localhost:3000,http://127.0.0.1:3000"

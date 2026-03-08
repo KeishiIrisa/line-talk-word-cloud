@@ -1,0 +1,42 @@
+# Python / backend
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+dist/
+build/
+.pytest_cache/
+.coverage
+htmlcov/
+*.log
+
+# 環境変数
+.env
+.env.dev
+.env.local
+.env.*.local
+
+# Node / frontend
+node_modules/
+.next/
+out/
+.turbo/
+*.tsbuildinfo
+next-env.d.ts
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# その他
+*.log
+.cache/
