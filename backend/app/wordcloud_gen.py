@@ -149,11 +149,13 @@ def generate_wordcloud_image(
         stopwords=stopwords,
         max_words=max_words,
         contour_width=0,
-        min_font_size=4,       # 小さい語も詰め込めるよう下限を下げる
-        max_font_size=60,      # 最大サイズを抑えて1語が広大なスペースを占有しないよう
-        relative_scaling=0.4,  # 頻度分布をフラットにして多くの語を同サイズで表示
-        prefer_horizontal=0.65,  # 縦書き比率を少し上げてスペースを活用
+        min_font_size=3,       # 下限をさらに下げて隙間に小さい語を詰める
+        max_font_size=50,      # 最大サイズを小さくして1語の占有面積を抑える
+        relative_scaling=0.3,  # 頻度差を更にフラットにして均等配置を促す
+        prefer_horizontal=0.6, # 縦語の割合を増やして縦方向の隙間も埋める
         collocations=False,    # 2語連結を無効にして単語数を増やす
+        repeat=True,           # 語数が少ない場合でも繰り返して空白を埋める
+        margin=2,              # 語間マージンを最小化して密度を上げる
     )
     wc.generate(tokenized)
     # WordCloud は RGB 画像を返す
