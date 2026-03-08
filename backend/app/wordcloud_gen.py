@@ -8,6 +8,7 @@ import io
 import re
 import unicodedata
 from pathlib import Path
+from random import Random
 from typing import Optional
 
 import numpy as np
@@ -104,6 +105,27 @@ def tokenize_for_wordcloud(text: str, mecab_tagger) -> str:
     return " ".join(tokens)
 
 
+# 白背景で見やすい色
+_WORDCLOUD_COLORS = [
+    "#2563eb",  # 青
+    "#1e40af",  # 濃い青
+    "#7c3aed",  # 紫
+    "#6d28d9",  # 濃い紫
+    "#059669",  # 緑
+    "#047857",  # 濃い緑
+    "#dc2626",  # 赤
+    "#ea580c",  # オレンジ
+    "#0f766e",  # ティール
+]
+
+
+def _wordcloud_color_func(word=None, font_size=None, position=None, orientation=None, font_path=None, random_state=None):
+    """指定パレットからランダムに色を返す。白背景で見やすい色のみ。"""
+    if random_state is None:
+        random_state = Random()
+    return random_state.choice(_WORDCLOUD_COLORS)
+
+
 def create_rounded_rect_mask(width: int, height: int, radius: int) -> np.ndarray:
     """
     角丸四角のマスクを返す。
@@ -145,7 +167,7 @@ def generate_wordcloud_image(
         height=height,
         mask=mask_arr,
         font_path=font_path,
-        colormap="magma",
+        color_func=_wordcloud_color_func,
         stopwords=stopwords,
         max_words=max_words,
         contour_width=0,
